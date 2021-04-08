@@ -1,5 +1,5 @@
 import { IComponent } from './component.h';
-
+import { IUpdate } from './update.h';
 type constr<T> = { new (...args: unknown[]): T };
 
 /***
@@ -9,13 +9,19 @@ type constr<T> = { new (...args: unknown[]): T };
  * 3. Return component by it's type if it was added
  * 4. Answer the question "is this component added or not?"
  **/
-export abstract class Entity {
+export abstract class Entity implements IUpdate {
     /** allow descendants access to the components array */
     protected _components: IComponent[] = [];
 
     // provide readonly access for components
     get Components(): IComponent[] {
         return this._components;
+    }
+
+    Update(deltaTime: number): void {
+        for (const component of this._components) {
+            component.Update(deltaTime);
+        }
     }
 
     /** adds a component to the component array and sets a reference to the entity */
