@@ -1,5 +1,6 @@
+import { IAwake, IUpdate } from '@/utils';
 import { IComponent } from './component.h';
-import { IUpdate } from './update.h';
+
 type constr<T> = { new (...args: unknown[]): T };
 
 /***
@@ -9,13 +10,19 @@ type constr<T> = { new (...args: unknown[]): T };
  * 3. Return component by it's type if it was added
  * 4. Answer the question "is this component added or not?"
  **/
-export abstract class Entity implements IUpdate {
+export abstract class Entity implements IAwake, IUpdate {
     /** allow descendants access to the components array */
     protected _components: IComponent[] = [];
 
     // provide readonly access for components
     get Components(): IComponent[] {
         return this._components;
+    }
+
+    Awake(): void {
+        for (const component of this._components) {
+            component.Awake();
+        }
     }
 
     Update(deltaTime: number): void {

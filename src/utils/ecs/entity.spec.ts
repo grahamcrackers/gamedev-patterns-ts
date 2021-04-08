@@ -4,18 +4,27 @@ import { IComponent } from './component.h';
 class E extends Entity {}
 class C1 implements IComponent {
     Entity: E;
+    Awake(): void {
+        /* ... */
+    }
     Update(deltaTime: number): void {
         /* ... */
     }
 }
 class C2 implements IComponent {
     Entity: E;
+    Awake(): void {
+        /* ... */
+    }
     Update(deltaTime: number): void {
         /* ... */
     }
 }
 class C3 implements IComponent {
     Entity: E;
+    Awake(): void {
+        /* ... */
+    }
     Update(deltaTime: number): void {
         /* ... */
     }
@@ -62,6 +71,26 @@ describe('>>> Entity', () => {
     it(`should throw and error if component wasn't found`, () => {
         expect(entity.HasComponent(C1)).toBeFalsy();
         expect(() => entity.GetComponent(C1)).toThrow();
+    });
+
+    it(`should awake all components`, () => {
+        const spy1 = jest.spyOn(c1, 'Awake');
+        const spy2 = jest.spyOn(c2, 'Awake');
+        const spy3 = jest.spyOn(c3, 'Awake');
+
+        expect(spy1).not.toBeCalled();
+        expect(spy2).not.toBeCalled();
+        expect(spy3).not.toBeCalled();
+
+        entity.AddComponent(c1);
+        entity.AddComponent(c2);
+        entity.AddComponent(c3);
+
+        entity.Awake();
+
+        expect(spy1).toBeCalledWith();
+        expect(spy2).toBeCalledWith();
+        expect(spy3).toBeCalledWith();
     });
 
     it(`should update all components`, () => {

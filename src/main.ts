@@ -1,3 +1,3 @@
-const message: string = 'I am a message';
+import { Game } from '@/game';
 
-console.log(message);
+new Game().Awake();
