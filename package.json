@@ -6,6 +6,7 @@
     "license": "MIT",
     "scripts": {
         "start": "yarn webpack-cli serve",
+        "build": "yarn webpack",
         "test": "yarn jest"
     },
     "dependencies": {},

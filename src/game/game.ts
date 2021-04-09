@@ -27,8 +27,6 @@ export class Game extends Entity {
             // start update loop
             this.Update();
         });
-
-        this.DirtyDraw();
     }
 
     Update(): void {
@@ -47,28 +45,5 @@ export class Game extends Entity {
 
         // update loop on frame instead of cycle
         window.requestAnimationFrame(() => this.Update());
-    }
-
-    private DirtyDraw(): void {
-        // create and attach Canvas to the DOM
-        const canvas = document.createElement('canvas');
-
-        // calculate canvas size
-        const { nodeSize: size, nodeOffset: offset, dimension, color } = Settings.grid;
-        const canvasSize = (size + offset) * dimension + offset;
-        canvas.setAttribute('width', canvasSize.toString());
-        canvas.setAttribute('height', canvasSize.toString());
-        document.body.appendChild(canvas);
-
-        for (let y = 0; y < dimension; y++) {
-            for (let x = 0; x < dimension; x++) {
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                const ctx = canvas.getContext('2d')!;
-                ctx.beginPath();
-                ctx.fillStyle = color;
-                ctx.rect((size + offset) * x, (size + offset) * y, size, size);
-                ctx.fill();
-            }
-        }
     }
 }
