@@ -1,6 +1,7 @@
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 
@@ -9,7 +10,7 @@ interface Configuration extends WebpackConfiguration {
 }
 
 const config: Configuration = {
-    entry: './src/main.ts',
+    entry: './src/index.ts',
     mode: 'development',
     devtool: 'inline-source-map',
     module: {
@@ -22,7 +23,7 @@ const config: Configuration = {
             },
             {
                 test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
         ],
     },
@@ -57,6 +58,7 @@ const config: Configuration = {
                 mode: 'write-references',
             },
         }),
+        new MiniCssExtractPlugin(),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, 'public', 'index.html'),
         }),
