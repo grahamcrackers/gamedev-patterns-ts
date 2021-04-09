@@ -1,5 +1,5 @@
 {
     // presets are run in reverse, babel-preset-typescript runs before babel-env
     "presets": ["@babel/env", "@babel/preset-typescript"],
-    "plugins": ["transform-class-properties"]
+    "plugins": ["transform-class-properties", "babel-plugin-tsconfig-paths"]
 }

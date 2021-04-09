@@ -12,14 +12,11 @@ const config: Configuration = {
     entry: './src/main.ts',
     mode: 'development',
     devtool: 'inline-source-map',
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
-    },
     module: {
         rules: [
             {
                 test: /\.tsx?$/,
-                // ts-loder vs babel-loader? both work here, but depends on which browsers/polyfills you want to support
+                // ts-loader vs babel-loader? both work here, but depends on which browsers/polyfills you want to support
                 use: 'babel-loader',
                 exclude: /node_modules/,
             },
@@ -28,6 +25,12 @@ const config: Configuration = {
                 use: ['style-loader', 'css-loader'],
             },
         ],
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js'],
+        alias: {
+            '@': path.join(__dirname, 'src'),
+        },
     },
     devServer: {
         contentBase: path.join(__dirname, 'public'),

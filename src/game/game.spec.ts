@@ -1,5 +1,6 @@
-import { Game } from '../game';
-import { Entity, IComponent } from '../utils';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Game } from '@/game';
+import { Entity, IComponent } from '@/utils';
 
 class C1 implements IComponent {
     public Entity: Game;

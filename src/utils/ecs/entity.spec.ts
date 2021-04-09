@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Entity } from './entity';
 import { IComponent } from './component.h';
 
